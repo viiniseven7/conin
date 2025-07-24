@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+
+
+
+db:
+  image: postgres:14.18
+  container_name: meu-postgres
+  restart:  always
+  enviroment: 
+     
+    POSTGRES_USER: vinicius
+    POSTGRES_PASSWORD: vinicius
+    POSTGRES_DB: Biblioteca
+  ports: 
+
+    - "5432:5432"
+
+  volumes:
+    - ./src: src
+
+app:
+  image: rezoleo/php
+  container_name: meu-postgres
+  restart: always
+  ports:
+    - "8080:80"
+  volumes:
+    - ./src:/var/www/html/
+  depends_on:
+    - db 
+volumes:
+  db_data:
